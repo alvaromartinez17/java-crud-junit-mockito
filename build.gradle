@@ -1,0 +1,60 @@
+// Configuración de plugins
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.0.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+// Información del proyecto
+group = 'com.alvaro'
+version = '0.0.1-SNAPSHOT'
+description = 'taskmanager'
+
+// Configuración de Java
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+// Configuración de compilación
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+// Repositorios para descargar dependencias
+repositories {
+    mavenCentral()
+}
+
+// Dependencias del proyecto
+dependencies {
+    // Spring Boot starter para JPA y persistencia de datos
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // Spring Boot starter para crear aplicaciones web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // Lombok para generar getters, setters y constructores automáticamente
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    
+    // Conector MySQL para la base de datos
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    
+    // Dependencias de prueba - Spring Boot Test incluye JUnit 5
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    
+    // Lanzador de JUnit Platform para ejecutar pruebas
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
+}
+
+// Configuración de tareas
+tasks.named('test') {
+    // Usa JUnit Platform para ejecutar las pruebas
+    useJUnitPlatform()
+}
