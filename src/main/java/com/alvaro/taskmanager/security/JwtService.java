@@ -15,7 +15,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    // Clave utilizada para firmar y validar los tokens. Debe mantenerse secreta.
+    // Clave utilizada para firmar y validar los tokens. Debe mantenerse secreta. la podria meter en RESOURCES TAMBIEN
     private static final String SECRET_KEY =
             "123456789123456789123456789123456789123456789";
 

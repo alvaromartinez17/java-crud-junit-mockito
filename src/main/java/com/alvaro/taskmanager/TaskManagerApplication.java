@@ -2,6 +2,7 @@ package com.alvaro.taskmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.kafka.annotation.EnableKafka;
 
 /**
  * Clase principal que inicia la aplicación Spring Boot de Gestión de Tareas.
@@ -10,7 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Utiliza Spring Data JPA para la persistencia de datos y Spring Boot
  * para la configuración automática de la aplicación.
  */
+
+@EnableKafka
 @SpringBootApplication
+
 public class TaskManagerApplication {
 
     /**
