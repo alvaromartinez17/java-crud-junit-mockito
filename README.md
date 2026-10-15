@@ -70,10 +70,15 @@ src/
 
 ```mermaid
 sequenceDiagram
-    Client->>+POST /auth/login: {username, password}
-    Server-->>-Client: {token: "eyJhbGciOiJIUzI1NiJ9..."}
-    Client->>+GET /tasks: Authorization: Bearer <token>
-    Server-->>-Client: 200 OK [tasks...]
+    participant C as Cliente
+    participant A as Auth Server
+    participant R as Resource Server
+
+    C->>A: POST /auth/login\n{username, password}
+    A-->>C: 200 OK\n{token: "eyJhbGciOiJIUzI1NiJ9..."}
+    
+    C->>R: GET /tasks\nAuthorization: Bearer <token>
+    R-->>C: 200 OK\n[tasks...]
 ```
 
 ### Configuración
