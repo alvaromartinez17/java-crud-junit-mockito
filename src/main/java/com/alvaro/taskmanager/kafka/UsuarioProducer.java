@@ -1,22 +1,32 @@
 package com.alvaro.taskmanager.kafka;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+/**
+ * Publica eventos de tareas en el topic de Kafka.
+ */
 @Service
 public class UsuarioProducer {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, TaskEvent> kafkaTemplate;
 
-    public UsuarioProducer(KafkaTemplate<String, String> kafkaTemplate) {
+    // Topic destino, definido en application.properties.
+    @Value("${app.kafka.topic.usuarios}")
+    private String topic;
+
+    public UsuarioProducer(KafkaTemplate<String, TaskEvent> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void enviarMensaje(String mensaje) {
-
-        kafkaTemplate.send(
-                "usuarios-topic",
-                mensaje
-        );
+    /**
+     * Envía un evento de tarea al topic. El evento viaja
+     * serializado en formato JSON.
+     *
+     * @param evento evento con los datos de la tarea afectada
+     */
+    public void enviarEvento(TaskEvent evento) {
+        kafkaTemplate.send(topic, evento);
     }
 }

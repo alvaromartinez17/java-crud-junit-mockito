@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
+/**
+ * Controlador de pruebas para el flujo de Kafka.
+ */
 @RestController
 @RequestMapping("/kafka")
 public class KafkaController {
@@ -15,16 +20,32 @@ public class KafkaController {
         this.producer = producer;
     }
 
+    /**
+     * Endpoint de prueba.
+     */
     @GetMapping("/test")
     public String test() {
         return "OK";
     }
 
+    /**
+     * Publica un evento JSON de ejemplo en el topic.
+     */
     @PostMapping
     public String enviar() {
 
-        producer.enviarMensaje("Hola Kafka");
+        // Evento de ejemplo para probar el flujo de Kafka.
+        TaskEvent evento = new TaskEvent(
+                "TAREA_CREADA",
+                0L,
+                "Hola Kafka",
+                "Evento de prueba",
+                false,
+                LocalDateTime.now()
+        );
 
-        return "Mensaje enviado a Kafka";
+        producer.enviarEvento(evento);
+
+        return "Evento enviado a Kafka";
     }
 }

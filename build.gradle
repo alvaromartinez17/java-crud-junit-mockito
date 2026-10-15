@@ -40,6 +40,9 @@ dependencies {
     // Spring Boot starter para seguridad
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    // Spring Kafka para mensajería
+    implementation 'org.springframework.kafka:spring-kafka'
+
     // Lombok para generar getters, setters y constructores automáticamente
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -50,7 +53,7 @@ dependencies {
     // Dependencias de prueba - Spring Boot Test incluye JUnit 5
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    // Lanzador de JUnit Platform para ejecutar pruebas
+    // Lanzador de JUnit Platform para ejecutar las pruebas
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // Dependencias JWT
@@ -63,29 +66,4 @@ dependencies {
 tasks.named('test') {
     // Usa JUnit Platform para ejecutar las pruebas
     useJUnitPlatform()
-}
-
-dependencies {
-
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-
-    implementation 'org.springframework.kafka:spring-kafka'
-
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    runtimeOnly 'com.mysql:mysql-connector-j'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
